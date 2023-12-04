@@ -2,31 +2,32 @@
 <html lang="en">
 
 <head>
-    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+    <!-- Встановлення налаштувань для відображення на різних пристроях -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Підключення стилів зовнішнього вигляду -->
     <link rel="stylesheet" href="styles.css" />
+    <!-- Заголовок сторінки -->
     <title>Інформація для цивільних у Києві</title>
 </head>
 
 <body>
     <?php
-  // header('Content-Type: text/html; charset=utf-8');
-  // Database connection details
+  // Деталі підключення до бази даних
   $servername = "127.0.0.1";
   $username = "root";
   $password = "change-me";
   $dbname = "public";
 
-  // Create connection
+  // Створення з'єднання з базою даних
   $conn = new mysqli($servername, $username, $password, $dbname);
   $conn->set_charset("latin1");
 
-  // Check connection
+  // Перевірка з'єднання
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
 
-  // Query the database
+  // Запит до бази даних
   if (isset($_GET["search"])) {
     $search = $_GET["search"];
     $sql = "SELECT title, body FROM posts WHERE title LIKE '%$search%' OR body LIKE '%$search%'";
@@ -38,11 +39,13 @@
   ?>
     <header>
         <div class="container">
+            <!-- Заголовок сайту -->
             <h1>Інформація для цивільних у Києві</h1>
         </div>
+        <!-- Форма для пошуку -->
         <form action="index.php" method="GET">
-            <input type="text" name="search" placeholder="Search...">
-            <button type="submit">Search</button>
+            <input type="text" name="search" placeholder="Пошук...">
+            <button type="submit">Пошук</button>
         </form>
     </header>
 
@@ -50,7 +53,7 @@
         <div class="container">
 
             <?php
-      // Display posts from the database
+      // Відображення постів з бази даних
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
           echo '<article class="blog-post">';
@@ -61,10 +64,10 @@
           echo '</article>';
         }
       } else {
-        echo '<p>No posts found</p>';
+        echo '<p>Постів не знайдено</p>';
       }
 
-      // Close the database connection
+      // Закриття з'єднання з базою даних
       $conn->close();
       ?>
 
@@ -73,6 +76,7 @@
 
     <footer>
         <div class="container">
+            <!-- Посилання на вхід -->
             <a href="#">Увійдіть тут</a>
         </div>
     </footer>
