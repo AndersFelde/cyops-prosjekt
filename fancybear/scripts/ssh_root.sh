@@ -12,5 +12,5 @@ do
     scp -i $key $script $username@$IP:$_path  
     ssh $username@$IP -i $key "chmod +x $_path$script"
     ssh $username@$IP -i $key "$_path$script"
-    sleep 180
+    sleep 90
 done
